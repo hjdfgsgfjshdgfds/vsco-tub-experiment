@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "test:search-filters": "node tests/search-filter-regression.mjs",
+    "grpc:generate": "node tools/generate-vsco-protos.mjs && grpc_tools_node_protoc -I proto/vsco-recovered --descriptor_set_out=docs/vsco-grpc.desc --include_imports proto/vsco-recovered/*.proto",
+    "grpc:validate": "node tools/validate-vsco-descriptor.mjs"
+  },
+  "devDependencies": {
+    "@rapideditor/country-coder": "^5.6.1",
+    "grpc-tools": "^1.13.1",
+    "protobufjs": "^8.7.2",
+    "puppeteer": "^24.37.5",
+    "puppeteer-core": "^24.37.5"
+  }
+}

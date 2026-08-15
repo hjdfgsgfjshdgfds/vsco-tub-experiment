@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package shared;
+
+// Recovered statically from VSCO's generated JavaScript client.
+// Unresolved message and enum fields intentionally use wire-compatible bytes/int32.
+
+message Coords {
+  double lat = 1;
+  double lng = 2;
+}
+
+message DateTime {
+  int64 sec = 1;
+  int64 ns = 2;
+  sint64 offset = 3;
+}

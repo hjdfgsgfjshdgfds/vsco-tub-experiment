@@ -1,0 +1,16 @@
+.DS_Store
+node_modules/
+local_app/node_modules/
+local_app/dist/
+test_failure.png
+*.log
+.vsco-grpc-session.json
+following.json
+cookies.json
+*.har
+.env
+.env.*
+!.env.example
+.claude/
+.playwright-cli/
+local_app/data/*.db

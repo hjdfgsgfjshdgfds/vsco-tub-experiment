@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package greyhound;
+
+// Recovered statically from VSCO's generated JavaScript client.
+// Unresolved message and enum fields intentionally use wire-compatible bytes/int32.
+
+message Article {
+  string idStr = 1;
+  string title = 2;
+  string permalink = 3;
+}
+
+message Image {
+  string idStr = 1;
+  string description = 2;
+  int32 height = 3;
+  int32 width = 4;
+  string permalink = 5;
+  bytes siteId = 6; // unresolved message type; preserved as opaque bytes
+  string responsiveUrl = 7;
+}
+
+message Site {
+  string idStr = 1;
+  string subdomain = 2;
+  string domain = 3;
+  bool active = 4;
+  string description = 5;
+  int64 userId = 6;
+  string name = 7;
+}
+
+message Video {
+  string idStr = 1;
+  int64 userId = 2;
+  string thumbnailUrl = 3;
+}

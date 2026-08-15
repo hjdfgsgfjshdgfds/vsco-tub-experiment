@@ -1,0 +1,273 @@
+{
+  "generatedAt": "2026-08-10T17:25:28.521Z",
+  "scope": "bounded authenticated read-only probes; result limits 1-2; identifiers omitted",
+  "summary": {
+    "total": 26,
+    "grpcSuccess": 7,
+    "http200NoGrpcFrames": 11,
+    "gateway404": 8,
+    "mutations": 0
+  },
+  "results": [
+    {
+      "service": "media.Media",
+      "method": "FetchActiveImagesBySite",
+      "httpStatus": 200,
+      "contentType": "application/grpc-web-text+proto",
+      "grpcStatus": "0",
+      "grpcMessage": "",
+      "dataBytes": 1958,
+      "frameCount": 2
+    },
+    {
+      "service": "media.Media",
+      "method": "FetchArticlesByImageID",
+      "httpStatus": 200,
+      "contentType": "application/grpc-web-text+proto",
+      "grpcStatus": null,
+      "grpcMessage": "",
+      "dataBytes": 0,
+      "frameCount": 0
+    },
+    {
+      "service": "media.Media",
+      "method": "FetchFeedback",
+      "httpStatus": 200,
+      "contentType": "application/grpc-web-text+proto",
+      "grpcStatus": "0",
+      "grpcMessage": "",
+      "dataBytes": 2,
+      "frameCount": 2
+    },
+    {
+      "service": "media.Media",
+      "method": "FetchFeedbackBatch",
+      "httpStatus": 200,
+      "contentType": "application/grpc-web-text+proto",
+      "grpcStatus": "0",
+      "grpcMessage": "",
+      "dataBytes": 2,
+      "frameCount": 2
+    },
+    {
+      "service": "media.Media",
+      "method": "FetchImage",
+      "httpStatus": 200,
+      "contentType": "application/grpc-web-text+proto",
+      "grpcStatus": null,
+      "grpcMessage": "",
+      "dataBytes": 0,
+      "frameCount": 0
+    },
+    {
+      "service": "media.Media",
+      "method": "FetchImages",
+      "httpStatus": 200,
+      "contentType": "application/grpc-web-text+proto",
+      "grpcStatus": "0",
+      "grpcMessage": "",
+      "dataBytes": 1447,
+      "frameCount": 2
+    },
+    {
+      "service": "media.Media",
+      "method": "FetchImagesBySite",
+      "httpStatus": 200,
+      "contentType": "application/grpc-web-text+proto",
+      "grpcStatus": null,
+      "grpcMessage": "",
+      "dataBytes": 0,
+      "frameCount": 0
+    },
+    {
+      "service": "media.Media",
+      "method": "FetchImagesByUserAndTag",
+      "httpStatus": 200,
+      "contentType": "application/grpc-web-text+proto",
+      "grpcStatus": null,
+      "grpcMessage": "",
+      "dataBytes": 0,
+      "frameCount": 0
+    },
+    {
+      "service": "media.Media",
+      "method": "FetchImageUploadData",
+      "httpStatus": 200,
+      "contentType": "application/grpc-web-text+proto",
+      "grpcStatus": null,
+      "grpcMessage": "",
+      "dataBytes": 0,
+      "frameCount": 0
+    },
+    {
+      "service": "media.Media",
+      "method": "FetchPersonalMedia",
+      "httpStatus": 200,
+      "contentType": "application/grpc-web-text+proto",
+      "grpcStatus": "0",
+      "grpcMessage": "",
+      "dataBytes": 0,
+      "frameCount": 2
+    },
+    {
+      "service": "media.Media",
+      "method": "FetchProfileImage",
+      "httpStatus": 200,
+      "contentType": "application/grpc-web-text+proto",
+      "grpcStatus": null,
+      "grpcMessage": "",
+      "dataBytes": 0,
+      "frameCount": 0
+    },
+    {
+      "service": "media.Media",
+      "method": "FetchProfileImages",
+      "httpStatus": 200,
+      "contentType": "application/grpc-web-text+proto",
+      "grpcStatus": null,
+      "grpcMessage": "",
+      "dataBytes": 0,
+      "frameCount": 0
+    },
+    {
+      "service": "media.Media",
+      "method": "FetchUserComments",
+      "httpStatus": 200,
+      "contentType": "application/grpc-web-text+proto",
+      "grpcStatus": "0",
+      "grpcMessage": "",
+      "dataBytes": 10,
+      "frameCount": 2
+    },
+    {
+      "service": "interaction.InteractionGrpc",
+      "method": "FetchCollectionItemBySiteAndMedia",
+      "httpStatus": 404,
+      "contentType": "text/html; charset=utf-8",
+      "grpcStatus": null,
+      "grpcMessage": "",
+      "dataBytes": 0,
+      "frameCount": 0
+    },
+    {
+      "service": "interaction.InteractionGrpc",
+      "method": "FetchCollectionItemsBySite",
+      "httpStatus": 404,
+      "contentType": "text/html; charset=utf-8",
+      "grpcStatus": null,
+      "grpcMessage": "",
+      "dataBytes": 0,
+      "frameCount": 0
+    },
+    {
+      "service": "interaction.InteractionGrpc",
+      "method": "FetchCollections",
+      "httpStatus": 404,
+      "contentType": "text/html; charset=utf-8",
+      "grpcStatus": null,
+      "grpcMessage": "",
+      "dataBytes": 0,
+      "frameCount": 0
+    },
+    {
+      "service": "interaction.InteractionGrpc",
+      "method": "FetchCollectionsBySite",
+      "httpStatus": 404,
+      "contentType": "text/html; charset=utf-8",
+      "grpcStatus": null,
+      "grpcMessage": "",
+      "dataBytes": 0,
+      "frameCount": 0
+    },
+    {
+      "service": "interaction.InteractionGrpc",
+      "method": "GetActivity",
+      "httpStatus": 200,
+      "contentType": "application/grpc-web-text+proto",
+      "grpcStatus": null,
+      "grpcMessage": "",
+      "dataBytes": 0,
+      "frameCount": 0
+    },
+    {
+      "service": "interaction.InteractionGrpc",
+      "method": "GetFavorites",
+      "httpStatus": 200,
+      "contentType": "application/grpc-web-text+proto",
+      "grpcStatus": null,
+      "grpcMessage": "",
+      "dataBytes": 0,
+      "frameCount": 0
+    },
+    {
+      "service": "interaction.InteractionGrpc",
+      "method": "GetInteractionIdsOfSite",
+      "httpStatus": 404,
+      "contentType": "text/html; charset=utf-8",
+      "grpcStatus": null,
+      "grpcMessage": "",
+      "dataBytes": 0,
+      "frameCount": 0
+    },
+    {
+      "service": "interaction.InteractionGrpc",
+      "method": "GetInteractionIdsOfSitesMedias",
+      "httpStatus": 404,
+      "contentType": "text/html; charset=utf-8",
+      "grpcStatus": null,
+      "grpcMessage": "",
+      "dataBytes": 0,
+      "frameCount": 0
+    },
+    {
+      "service": "interaction.InteractionGrpc",
+      "method": "GetReactionsForMedia",
+      "httpStatus": 200,
+      "contentType": "application/grpc-web-text+proto",
+      "grpcStatus": "0",
+      "grpcMessage": "",
+      "dataBytes": 24,
+      "frameCount": 2
+    },
+    {
+      "service": "interaction.InteractionGrpc",
+      "method": "GetReactionsForMedias",
+      "httpStatus": 200,
+      "contentType": "application/grpc-web-text+proto",
+      "grpcStatus": null,
+      "grpcMessage": "",
+      "dataBytes": 0,
+      "frameCount": 0
+    },
+    {
+      "service": "interaction.InteractionGrpc",
+      "method": "GetRepostedMediaIdsForSite",
+      "httpStatus": 404,
+      "contentType": "text/html; charset=utf-8",
+      "grpcStatus": null,
+      "grpcMessage": "",
+      "dataBytes": 0,
+      "frameCount": 0
+    },
+    {
+      "service": "interaction.InteractionGrpc",
+      "method": "GetReposts",
+      "httpStatus": 200,
+      "contentType": "application/grpc-web-text+proto",
+      "grpcStatus": null,
+      "grpcMessage": "",
+      "dataBytes": 0,
+      "frameCount": 0
+    },
+    {
+      "service": "interaction.InteractionGrpc",
+      "method": "HasReactions",
+      "httpStatus": 404,
+      "contentType": "text/html; charset=utf-8",
+      "grpcStatus": null,
+      "grpcMessage": "",
+      "dataBytes": 0,
+      "frameCount": 0
+    }
+  ]
+}

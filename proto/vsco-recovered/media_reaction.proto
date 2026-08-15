@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package media_reaction;
+
+// Recovered statically from VSCO's generated JavaScript client.
+// Unresolved message and enum fields intentionally use wire-compatible bytes/int32.
+
+message MediaId {
+  string imageId = 1;
+  string videoId = 2;
+}
+
+message MediaReaction {
+  MediaId mediaId = 1;
+  bool beenFavorited = 2;
+  bool beenReposted = 3;
+}

@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package collection;
+
+import "media_meta.proto";
+import "shared.proto";
+
+// Recovered statically from VSCO's generated JavaScript client.
+// Unresolved message and enum fields intentionally use wire-compatible bytes/int32.
+
+message Collection {
+  string id = 1;
+  int64 siteId = 2;
+  int32 status = 3; // unresolved enum identity; preserved as int32
+  .shared.DateTime lastUpdated = 4;
+  .shared.DateTime createdDate = 5;
+  string title = 6;
+  string description = 7;
+  string coverImage = 8;
+  .media_meta.CoverImageMeta coverImageMeta = 9;
+}
+
+message CollectionItem {
+  string id = 1;
+  int64 collectorSiteId = 2;
+  bool inBin = 3;
+  .shared.DateTime lastUpdated = 4;
+  repeated CollectionRef collectionList = 5;
+  bytes media = 6; // unresolved message type; preserved as opaque bytes
+  string type = 7;
+  .shared.DateTime createdDate = 8;
+  Reactions reactions = 9;
+  string collectionId = 10;
+  int64 uploaderSiteId = 11;
+  bytes video = 13; // unresolved message type; preserved as opaque bytes
+}
+
+message CollectionRef {
+  string id = 1;
+  int32 status = 2; // unresolved enum identity; preserved as int32
+  .shared.DateTime collectedDate = 3;
+}
+
+message Reaction {
+  int32 status = 1; // unresolved enum identity; preserved as int32
+  .shared.DateTime lastUpdated = 2;
+}
+
+message Reactions {
+  Reaction favorite = 1;
+  Reaction repost = 2;
+  Reaction bin = 3;
+}
+
+message RepeatedMediaId {
+  repeated string mediaIdsList = 1;
+}

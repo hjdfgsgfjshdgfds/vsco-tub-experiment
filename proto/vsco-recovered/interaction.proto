@@ -1,0 +1,299 @@
+syntax = "proto3";
+
+package interaction;
+
+import "collection.proto";
+import "media_reaction.proto";
+import "shared.proto";
+import "sites.proto";
+
+// Recovered statically from VSCO's generated JavaScript client.
+// Unresolved message and enum fields intentionally use wire-compatible bytes/int32.
+
+message Activity {
+  .sites.Site site = 1;
+  int32 reaction = 2; // unresolved enum identity; preserved as int32
+  int32 followStatus = 3; // unresolved enum identity; preserved as int32
+  string collectionId = 4;
+  bool allowAction = 5;
+}
+
+message CreateCollectionRequest {
+  int64 siteId = 1;
+  int32 status = 2; // unresolved enum identity; preserved as int32
+}
+
+message CreateCollectionResponse {
+  string collectionId = 1;
+}
+
+message CreateFavoriteRequest {
+  int64 siteId = 1;
+  string imageId = 2;
+  string videoId = 3;
+}
+
+message CreateFavoriteResponse {
+}
+
+message CreateRepostRequest {
+  string collectionId = 1;
+  int64 siteId = 2;
+  string imageId = 3;
+  string videoId = 4;
+}
+
+message CreateRepostResponse {
+}
+
+message DeleteFavoriteRequest {
+  int64 siteId = 1;
+  string imageId = 2;
+  string videoId = 3;
+}
+
+message DeleteFavoriteResponse {
+}
+
+message DeleteInteractionsOfSitesMediasRequest {
+  int64 uploaderSiteId = 1;
+  repeated string collectionItemIdsList = 2;
+}
+
+message DeleteInteractionsOfSitesMediasResponse {
+  bool success = 1;
+}
+
+message DeleteInteractionsRequest {
+  int64 collectorSiteId = 1;
+  repeated string collectionItemIdsList = 2;
+}
+
+message DeleteInteractionsResponse {
+  bool success = 1;
+}
+
+message DeleteRepostRequest {
+  string collectionId = 1;
+  int64 siteId = 2;
+  string imageId = 3;
+  string videoId = 4;
+}
+
+message DeleteRepostResponse {
+}
+
+message FetchCollectionItemBySiteAndMediaRequest {
+  int64 collectorSiteId = 1;
+  string mediaId = 2;
+}
+
+message FetchCollectionItemBySiteAndMediaResponse {
+  .collection.CollectionItem collectionItem = 1;
+}
+
+message FetchCollectionItemsByIdRequest {
+  repeated string idsList = 1;
+}
+
+message FetchCollectionItemsByIdResponse {
+  repeated .collection.CollectionItem collectionItemsList = 1;
+}
+
+message FetchCollectionItemsBySiteRequest {
+  int64 siteId = 1;
+  .shared.DateTime until = 2;
+  int64 limit = 3;
+  bool includeSuspended = 4;
+  repeated int32 requestedTypesList = 5; // unresolved enum identity; preserved as int32
+}
+
+message FetchCollectionItemsBySiteResponse {
+  repeated .collection.CollectionItem collectionItemsList = 1;
+}
+
+message FetchCollectionsBySiteRequest {
+  int64 siteId = 1;
+  bool includeSuspended = 2;
+}
+
+message FetchCollectionsRequest {
+  repeated string idsList = 1;
+}
+
+message FetchCollectionsResponse {
+  repeated .collection.Collection collectionsList = 1;
+}
+
+message GetActivityRequest {
+  int64 siteId = 1;
+  string cursor = 2;
+  string imageId = 3;
+  string videoId = 4;
+}
+
+message GetActivityResponse {
+  repeated Activity activityList = 1;
+  string nextCursor = 2;
+}
+
+message GetFavoritesRequest {
+  PaginationRequest pagination = 1;
+  repeated int32 requestedTypesList = 2; // unresolved enum identity; preserved as int32
+}
+
+message GetFavoritesResponse {
+  repeated .collection.CollectionItem collectionItemsList = 1;
+  PaginationResponse pagination = 2;
+}
+
+message GetInteractionIdsOfSiteRequest {
+  int64 collectorSiteId = 1;
+  string cursor = 2;
+  uint32 limit = 3;
+}
+
+message GetInteractionIdsOfSiteResponse {
+  repeated string collectionItemIdsList = 1;
+  string nextCursor = 2;
+}
+
+message GetInteractionIdsOfSitesMediasRequest {
+  int64 uploaderSiteId = 1;
+  string cursor = 2;
+  uint32 limit = 3;
+}
+
+message GetInteractionIdsOfSitesMediasResponse {
+  repeated string collectionItemIdsList = 1;
+  string nextCursor = 2;
+}
+
+message GetReactionsForMediaRequest {
+  int64 siteId = 1;
+  string imageId = 2;
+  string videoId = 3;
+  bool fetchHasActivity = 4;
+}
+
+message GetReactionsForMediaResponse {
+  .collection.Reactions reactions = 1;
+  bool hasActivity = 2;
+  bool beenFavorited = 3;
+  bool beenReposted = 4;
+}
+
+message GetReactionsForMediasRequest {
+  int64 siteId = 1;
+  repeated .media_reaction.MediaId mediaIdsList = 2;
+}
+
+message GetReactionsForMediasResponse {
+  repeated .media_reaction.MediaReaction reactionsList = 1;
+}
+
+message GetRepostedMediaIdsForSiteRequest {
+  int64 siteId = 1;
+  uint32 page = 2;
+  uint32 size = 3;
+}
+
+message GetRepostedMediaIdsForSiteResponse {
+  .collection.RepeatedMediaId mediaIds = 1;
+}
+
+message GetRepostsRequest {
+  string collectionId = 1;
+  PaginationRequest pagination = 2;
+  repeated int32 requestedTypesList = 3; // unresolved enum identity; preserved as int32
+}
+
+message GetRepostsResponse {
+  repeated .collection.CollectionItem collectionItemsList = 1;
+  PaginationResponse pagination = 2;
+}
+
+message HasReactionsRequest {
+  int64 uploaderSiteId = 1;
+  string mediaId = 2;
+}
+
+message HasReactionsResponse {
+  bool hasReactions = 1;
+}
+
+message InvalidateCollectionCacheRequest {
+  string collectionid = 1;
+}
+
+message InvalidateCollectionCacheResponse {
+  bool ok = 1;
+}
+
+message OptoutRequest {
+  string imageId = 1;
+  string videoId = 2;
+  int64 collectorSiteId = 3;
+  int64 uploaderSiteId = 4;
+}
+
+message OptoutResponse {
+}
+
+message PaginationRequest {
+  int64 page = 1;
+  int64 size = 2;
+}
+
+message PaginationResponse {
+  int64 page = 1;
+  int64 size = 2;
+  int64 total = 3;
+  bool hasNext = 4;
+}
+
+message TestRequest {
+  string id = 1;
+}
+
+message TestResponse {
+  string response = 1;
+}
+
+message UpdateCollectionsRequest {
+  repeated string idsList = 1;
+  int32 status = 2; // unresolved enum identity; preserved as int32
+}
+
+message UpdateCollectionsResponse {
+}
+
+service InteractionGrpc {
+  rpc AdminCreateRepost (CreateRepostRequest) returns (CreateRepostResponse);
+  rpc AdminDeleteRepost (DeleteRepostRequest) returns (DeleteRepostResponse);
+  rpc CreateCollection (CreateCollectionRequest) returns (CreateCollectionResponse);
+  rpc CreateFavorite (CreateFavoriteRequest) returns (CreateFavoriteResponse);
+  rpc CreateRepost (CreateRepostRequest) returns (CreateRepostResponse);
+  rpc DeleteFavorite (DeleteFavoriteRequest) returns (DeleteFavoriteResponse);
+  rpc DeleteInteractions (DeleteInteractionsRequest) returns (DeleteInteractionsResponse);
+  rpc DeleteInteractionsOfSitesMedias (DeleteInteractionsOfSitesMediasRequest) returns (DeleteInteractionsOfSitesMediasResponse);
+  rpc DeleteRepost (DeleteRepostRequest) returns (DeleteRepostResponse);
+  rpc FetchCollectionItemBySiteAndMedia (FetchCollectionItemBySiteAndMediaRequest) returns (FetchCollectionItemBySiteAndMediaResponse);
+  rpc FetchCollectionItemsById (FetchCollectionItemsByIdRequest) returns (FetchCollectionItemsByIdResponse);
+  rpc FetchCollectionItemsBySite (FetchCollectionItemsBySiteRequest) returns (FetchCollectionItemsBySiteResponse);
+  rpc FetchCollections (FetchCollectionsRequest) returns (FetchCollectionsResponse);
+  rpc FetchCollectionsBySite (FetchCollectionsBySiteRequest) returns (FetchCollectionsResponse);
+  rpc GetActivity (GetActivityRequest) returns (GetActivityResponse);
+  rpc GetFavorites (GetFavoritesRequest) returns (GetFavoritesResponse);
+  rpc GetInteractionIdsOfSite (GetInteractionIdsOfSiteRequest) returns (GetInteractionIdsOfSiteResponse);
+  rpc GetInteractionIdsOfSitesMedias (GetInteractionIdsOfSitesMediasRequest) returns (GetInteractionIdsOfSitesMediasResponse);
+  rpc GetReactionsForMedia (GetReactionsForMediaRequest) returns (GetReactionsForMediaResponse);
+  rpc GetReactionsForMedias (GetReactionsForMediasRequest) returns (GetReactionsForMediasResponse);
+  rpc GetRepostedMediaIdsForSite (GetRepostedMediaIdsForSiteRequest) returns (GetRepostedMediaIdsForSiteResponse);
+  rpc GetReposts (GetRepostsRequest) returns (GetRepostsResponse);
+  rpc HasReactions (HasReactionsRequest) returns (HasReactionsResponse);
+  rpc InvalidateCollectionCache (InvalidateCollectionCacheRequest) returns (InvalidateCollectionCacheResponse);
+  rpc Optout (OptoutRequest) returns (OptoutResponse);
+  rpc TestRPC (TestRequest) returns (TestResponse);
+  rpc UpdateCollections (UpdateCollectionsRequest) returns (UpdateCollectionsResponse);
+}

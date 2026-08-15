@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package journal;
+
+import "media_meta.proto";
+import "shared.proto";
+
+// Recovered statically from VSCO's generated JavaScript client.
+// Unresolved message and enum fields intentionally use wire-compatible bytes/int32.
+
+message Article {
+  string id = 1;
+  int64 siteId = 2;
+  int64 userId = 3;
+  int32 status = 4; // unresolved enum identity; preserved as int32
+  .shared.DateTime updateDate = 5;
+  .shared.DateTime createdDate = 6;
+  .shared.DateTime publishedDate = 7;
+  string permalink = 8;
+  repeated string categoriesList = 9;
+  string title = 10;
+  string subtitle = 11;
+  Image coverImage = 12;
+  repeated Block bodyList = 13;
+  ArticleStatus articleStatus = 14;
+  .media_meta.CoverImageMeta coverImageMeta = 15;
+  repeated .media_meta.Tag articleCategoriesList = 16;
+  string publishedDateTz = 17;
+  repeated string articlesList = 18;
+  string uuid = 19;
+  .shared.DateTime previewExpirationDate = 20;
+  string author = 21;
+  string domain = 22;
+  string gridName = 23;
+  bool articleAdminReview = 24;
+  int32 errorCount = 25;
+  string originalPermalink = 26;
+  bytes site = 27; // unresolved message type; preserved as opaque bytes
+}
+
+message ArticleStatus {
+  int32 code = 1;
+  .shared.DateTime timestamp = 2;
+}
+
+message Block {
+  string id = 1;
+  string type = 2;
+  string text = 3;
+  repeated Image imagesList = 4;
+  Video video = 5;
+}
+
+message Image {
+  string id = 1;
+  int32 width = 2;
+  int32 height = 3;
+  string storageLocation = 4;
+  string fileName = 5;
+  bool isVideo = 6;
+  string videoFileName = 7;
+  Block caption = 8;
+}
+
+message Video {
+  string provider = 1;
+  string id = 2;
+  string url = 3;
+  string resourceid = 4;
+}

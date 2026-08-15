@@ -1,0 +1,427 @@
+syntax = "proto3";
+
+package media;
+
+import "grid.proto";
+import "journal.proto";
+import "shared.proto";
+import "sites.proto";
+
+// Recovered statically from VSCO's generated JavaScript client.
+// Unresolved message and enum fields intentionally use wire-compatible bytes/int32.
+
+message AdminCreateArticleRequest {
+  .journal.Article article = 1;
+}
+
+message AdminCreateArticleResponse {
+  .journal.Article article = 1;
+  int32 error = 2; // unresolved enum identity; preserved as int32
+}
+
+message AdminDeleteArticleRequest {
+  string id = 1;
+}
+
+message AdminDeleteArticleResponse {
+  int32 error = 1; // unresolved enum identity; preserved as int32
+}
+
+message AdminDeleteCommentRequest {
+  string commentId = 1;
+}
+
+message AdminDeleteCommentResponse {
+  int32 status = 1; // unresolved enum identity; preserved as int32
+}
+
+message AdminFetchCommentRequest {
+  string commentId = 1;
+}
+
+message AdminFetchCommentResponse {
+  int32 status = 1; // unresolved enum identity; preserved as int32
+  Comment comment = 2;
+  Feedback feedback = 3;
+}
+
+message AdminUpdateArticleRequest {
+  .journal.Article article = 1;
+}
+
+message AdminUpdateArticleResponse {
+  .journal.Article article = 1;
+  int32 error = 2; // unresolved enum identity; preserved as int32
+}
+
+message Comment {
+  string commentId = 1;
+  string feedbackId = 2;
+  int64 fromUserId = 3;
+  string text = 4;
+  .shared.DateTime createdAt = 5;
+  .shared.DateTime updatedAt = 6;
+  uint64 order = 8;
+  string uuid = 9;
+  bool deleted = 12;
+  bytes fromSite = 13; // unresolved message type; preserved as opaque bytes
+}
+
+message ConfigureFeedbackRequest {
+  string mediaId = 1;
+  int32 commentsEnabled = 2; // unresolved enum identity; preserved as int32
+  int32 notifsEnabled = 3; // unresolved enum identity; preserved as int32
+}
+
+message ConfigureFeedbackResponse {
+  Feedback feedback = 1;
+  int32 status = 2; // unresolved enum identity; preserved as int32
+}
+
+message Cursor {
+  .shared.DateTime since = 1;
+}
+
+message DeleteCommentRequest {
+  string mediaId = 1;
+  string commentId = 2;
+}
+
+message DeleteCommentResponse {
+  int32 status = 1; // unresolved enum identity; preserved as int32
+}
+
+message DeleteImageRequest {
+  string mediaId = 1;
+}
+
+message DeleteImageResponse {
+  bool success = 1;
+  int32 error = 2; // unresolved enum identity; preserved as int32
+  string message = 3;
+}
+
+message Feedback {
+  string feedbackId = 1;
+  int64 userId = 2;
+  int64 creatorUserId = 3;
+  int32 mediaType = 4; // unresolved enum identity; preserved as int32
+  .shared.DateTime createdAt = 5;
+  .shared.DateTime updatedAt = 6;
+  uint64 commentCount = 7;
+  bool notifsDisabled = 8;
+  bool commentsEnabled = 9;
+  repeated Comment commentsList = 10;
+  int32 canMessage = 11; // unresolved enum identity; preserved as int32
+  bytes creatorSite = 12; // unresolved message type; preserved as opaque bytes
+}
+
+message FeedbackCursor {
+  uint64 untilOrder = 1;
+  uint64 sinceOrder = 2;
+  repeated uint64 previousOrdersList = 3;
+}
+
+message FetchArticleByPermalinkRequest {
+  string permalink = 1;
+  int64 siteId = 2;
+}
+
+message FetchArticleRequest {
+  string id = 1;
+}
+
+message FetchArticleResponse {
+  .journal.Article article = 1;
+}
+
+message FetchArticlesByImageIDRequest {
+  string imageId = 1;
+}
+
+message FetchArticlesBySiteRequest {
+  int64 siteId = 1;
+  string category = 3;
+  .shared.DateTime since = 4;
+  bool draft = 5;
+  bool published = 6;
+  bool deleted = 7;
+  int64 offset = 8;
+  int64 limit = 9;
+  bool returnall = 10;
+  bool includeSuspended = 11;
+  bool scanForward = 12;
+}
+
+message FetchArticlesRequest {
+  repeated string idsList = 1;
+}
+
+message FetchArticlesResponse {
+  repeated .journal.Article articlesList = 1;
+}
+
+message FetchFeedbackBatchRequest {
+  repeated string mediaIdsList = 1;
+}
+
+message FetchFeedbackBatchResponse {
+  repeated Feedback feedbackBatchList = 1;
+  int32 status = 2; // unresolved enum identity; preserved as int32
+}
+
+message FetchFeedbackRequest {
+  string mediaId = 1;
+  int64 limit = 2;
+  FeedbackCursor cursor = 3;
+  bool scanForward = 4;
+  string fromCommentId = 5;
+}
+
+message FetchFeedbackResponse {
+  Feedback feedback = 1;
+  FeedbackCursor cursor = 2;
+  int32 status = 3; // unresolved enum identity; preserved as int32
+}
+
+message FetchImageRequest {
+  string id = 1;
+  bool includeSite = 2;
+  bool includeSuspended = 3;
+}
+
+message FetchImageResponse {
+  .grid.Image image = 1;
+}
+
+message FetchImagesByAlbumRequest {
+  string albumId = 1;
+  int64 offset = 2;
+  int64 limit = 3;
+}
+
+message FetchImagesBySiteRequest {
+  int64 siteId = 1;
+  int64 offset = 2;
+  int64 limit = 3;
+  bool includeSuspended = 4;
+}
+
+message FetchImagesByUserAndTagRequest {
+  int64 userId = 1;
+  string tag = 2;
+  int64 limit = 3;
+  int64 offset = 4;
+}
+
+message FetchImagesInternalRequest {
+  repeated string idsList = 1;
+  bool includeSite = 2;
+  bool includeSuspended = 3;
+}
+
+message FetchImagesInternalResponse {
+  repeated .grid.Image imagesList = 1;
+}
+
+message FetchImagesRequest {
+  repeated string idsList = 1;
+  bool includeSite = 2;
+  bool includeSuspended = 3;
+}
+
+message FetchImagesResponse {
+  repeated .grid.Image imagesList = 1;
+}
+
+message FetchImageUploadDataRequest {
+  repeated string idsList = 1;
+}
+
+message FetchImageUploadDataResponse {
+  repeated .grid.UploadData uploadDataList = 1;
+}
+
+message FetchPersonalMediaRequest {
+  int64 siteId = 1;
+  repeated int32 showonlyList = 2; // unresolved enum identity; preserved as int32
+  bool activeOnly = 3;
+  bool scanForward = 4;
+  Cursor cursor = 5;
+  int32 limit = 6;
+}
+
+message FetchPersonalMediaResponse {
+  repeated MediaContent contentList = 1;
+  Cursor cursor = 2;
+}
+
+message FetchProfileImageRequest {
+  string id = 1;
+}
+
+message FetchProfileImageResponse {
+  .sites.ProfileImage profileImage = 1;
+}
+
+message FetchProfileImagesRequest {
+  repeated string idsList = 1;
+}
+
+message FetchProfileImagesResponse {
+  repeated .sites.ProfileImage profileImagesList = 1;
+}
+
+message FetchSlimArticlesRequest {
+  repeated string idsList = 1;
+  Sort sort = 2;
+}
+
+message FetchSlimArticlesResponse {
+  repeated .journal.Article articlesList = 1;
+}
+
+message FetchUserCommentsRequest {
+  int64 userId = 1;
+  int64 limit = 2;
+  FeedbackCursor cursor = 3;
+  bool scanForward = 4;
+}
+
+message FetchUserCommentsResponse {
+  repeated Comment commentsList = 1;
+  FeedbackCursor cursor = 2;
+  int32 status = 3; // unresolved enum identity; preserved as int32
+}
+
+message GenerateUploadUrlRequest {
+  string filename = 1;
+  int64 sizeHint = 2;
+}
+
+message GenerateUploadUrlResponse {
+  string mediaId = 1;
+  string url = 2;
+}
+
+message ImageUploadCompleteInternalRequest {
+  ImageUploadCompleteRequest baseRequest = 1;
+  int64 userId = 2;
+  string persistSource = 3;
+  int64 maxfilesizeoverride = 4;
+}
+
+message ImageUploadCompleteInternalResponse {
+}
+
+message ImageUploadCompleteRequest {
+  string mediaId = 1;
+  string filename = 2;
+  bool showLocation = 3;
+  bool publish = 4;
+  string description = 5;
+  string syncId = 6;
+  int32 source = 7; // unresolved enum identity; preserved as int32
+  .grid.EditStack editStack = 8;
+  bool allowFeedback = 9;
+}
+
+message ImageUploadCompleteResponse {
+  string mediaId = 1;
+  .grid.Image image = 2;
+  bool success = 3;
+  int32 error = 4; // unresolved enum identity; preserved as int32
+  string message = 5;
+}
+
+message InsertCommentRequest {
+  string mediaId = 1;
+  string comment = 2;
+  string uuid = 3;
+}
+
+message InsertCommentResponse {
+  Comment comment = 1;
+  int32 status = 2; // unresolved enum identity; preserved as int32
+}
+
+message IntentToUploadRequest {
+  string filename = 1;
+  int64 sizeHint = 2;
+  string description = 3;
+}
+
+message IntentToUploadResponse {
+  string mediaId = 1;
+  string bucket = 2;
+  string partialPath = 3;
+  string responsiveUrl = 4;
+}
+
+message MediaContent {
+  string id = 1;
+  .shared.DateTime date = 2;
+  .grid.Image image = 3;
+  bytes video = 4; // unresolved message type; preserved as opaque bytes
+  bool isPinned = 5;
+}
+
+message Sort {
+  int32 sortBy = 1; // unresolved enum identity; preserved as int32
+  bool scanForward = 2;
+}
+
+message UpdateArticlesRequest {
+  repeated string idsList = 1;
+  int32 status = 2; // unresolved enum identity; preserved as int32
+}
+
+message UpdateArticlesResponse {
+}
+
+message UpdateImagesRequest {
+  repeated string idsList = 1;
+  int32 status = 2; // unresolved enum identity; preserved as int32
+}
+
+message UpdateImagesResponse {
+}
+
+service Media {
+  rpc AdminCreateArticle (AdminCreateArticleRequest) returns (AdminCreateArticleResponse);
+  rpc AdminDeleteArticle (AdminDeleteArticleRequest) returns (AdminDeleteArticleResponse);
+  rpc AdminDeleteComment (AdminDeleteCommentRequest) returns (AdminDeleteCommentResponse);
+  rpc AdminFetchArticle (FetchArticleRequest) returns (FetchArticleResponse);
+  rpc AdminFetchComment (AdminFetchCommentRequest) returns (AdminFetchCommentResponse);
+  rpc AdminFetchImage (FetchImageRequest) returns (FetchImageResponse);
+  rpc AdminUpdateArticle (AdminUpdateArticleRequest) returns (AdminUpdateArticleResponse);
+  rpc ConfigureFeedback (ConfigureFeedbackRequest) returns (ConfigureFeedbackResponse);
+  rpc DeleteComment (DeleteCommentRequest) returns (DeleteCommentResponse);
+  rpc DeleteImage (DeleteImageRequest) returns (DeleteImageResponse);
+  rpc FetchActiveImagesBySite (FetchImagesBySiteRequest) returns (FetchImagesResponse);
+  rpc FetchArticleByPermalink (FetchArticleByPermalinkRequest) returns (FetchArticleResponse);
+  rpc FetchArticles (FetchArticlesRequest) returns (FetchArticlesResponse);
+  rpc FetchArticlesByImageID (FetchArticlesByImageIDRequest) returns (FetchArticlesResponse);
+  rpc FetchArticlesBySite (FetchArticlesBySiteRequest) returns (FetchArticlesResponse);
+  rpc FetchFeedback (FetchFeedbackRequest) returns (FetchFeedbackResponse);
+  rpc FetchFeedbackBatch (FetchFeedbackBatchRequest) returns (FetchFeedbackBatchResponse);
+  rpc FetchImage (FetchImageRequest) returns (FetchImageResponse);
+  rpc FetchImages (FetchImagesRequest) returns (FetchImagesResponse);
+  rpc FetchImagesByAlbum (FetchImagesByAlbumRequest) returns (FetchImagesResponse);
+  rpc FetchImagesBySite (FetchImagesBySiteRequest) returns (FetchImagesResponse);
+  rpc FetchImagesByUserAndTag (FetchImagesByUserAndTagRequest) returns (FetchImagesResponse);
+  rpc FetchImagesInternal (FetchImagesInternalRequest) returns (FetchImagesInternalResponse);
+  rpc FetchImageUploadData (FetchImageUploadDataRequest) returns (FetchImageUploadDataResponse);
+  rpc FetchPersonalMedia (FetchPersonalMediaRequest) returns (FetchPersonalMediaResponse);
+  rpc FetchProfileImage (FetchProfileImageRequest) returns (FetchProfileImageResponse);
+  rpc FetchProfileImages (FetchProfileImagesRequest) returns (FetchProfileImagesResponse);
+  rpc FetchSlimArticles (FetchSlimArticlesRequest) returns (FetchSlimArticlesResponse);
+  rpc FetchUserComments (FetchUserCommentsRequest) returns (FetchUserCommentsResponse);
+  rpc GenerateUploadUrl (GenerateUploadUrlRequest) returns (GenerateUploadUrlResponse);
+  rpc ImageUploadComplete (ImageUploadCompleteRequest) returns (ImageUploadCompleteResponse);
+  rpc ImageUploadCompleteInternal (ImageUploadCompleteInternalRequest) returns (ImageUploadCompleteInternalResponse);
+  rpc InsertComment (InsertCommentRequest) returns (InsertCommentResponse);
+  rpc IntentToUpload (IntentToUploadRequest) returns (IntentToUploadResponse);
+  rpc UpdateArticles (UpdateArticlesRequest) returns (UpdateArticlesResponse);
+  rpc UpdateImages (UpdateImagesRequest) returns (UpdateImagesResponse);
+}

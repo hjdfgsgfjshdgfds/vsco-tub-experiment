@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package media_meta;
+
+// Recovered statically from VSCO's generated JavaScript client.
+// Unresolved message and enum fields intentionally use wire-compatible bytes/int32.
+
+message CoverImageMeta {
+  int64 width = 1;
+  int64 height = 2;
+  string responsiveUrl = 3;
+  string videoUrl = 4;
+  bool isVideo = 5;
+}
+
+message Tag {
+  string text = 1;
+  string slug = 2;
+}

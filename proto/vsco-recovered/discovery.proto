@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package discovery;
+
+import "collection.proto";
+
+// Recovered statically from VSCO's generated JavaScript client.
+// Unresolved message and enum fields intentionally use wire-compatible bytes/int32.
+
+message Image {
+  Image image = 1;
+  Item preset = 2;
+}
+
+message Item {
+  Image image = 1;
+  .collection.CollectionItem collectionitem = 2;
+  bytes article = 3; // unresolved message type; preserved as opaque bytes
+  bytes video = 4; // unresolved message type; preserved as opaque bytes
+}

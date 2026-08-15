@@ -1,0 +1,107 @@
+syntax = "proto3";
+
+package sites;
+
+import "shared.proto";
+
+// Recovered statically from VSCO's generated JavaScript client.
+// Unresolved message and enum fields intentionally use wire-compatible bytes/int32.
+
+message Album {
+  string grid = 1;
+  string journal = 2;
+  string profile = 3;
+  string spaces = 4;
+}
+
+message AvailabilityTag {
+  int32 type = 1; // unresolved enum identity; preserved as int32
+}
+
+message GeoPoint {
+  string type = 1;
+  repeated double coordinatesList = 2;
+}
+
+message Location {
+  bool isPublic = 1;
+  string locality = 2;
+  string district = 3;
+  int32 countryCode = 4; // unresolved enum identity; preserved as int32
+  GeoPoint geoLocation = 5;
+}
+
+message PinnedMedia {
+  string id = 1;
+}
+
+message ProfileImage {
+  string id = 1;
+  string storageLocation = 2;
+  string fileName = 3;
+  string responsiveUrl = 4;
+}
+
+message Settings {
+  int64 siteId = 1;
+  string siteTitle = 2;
+}
+
+message Site {
+  string id = 1;
+  int64 siteId = 2;
+  string domain = 3;
+  int64 userId = 4;
+  .shared.DateTime addedDate = 5;
+  bool active = 6;
+  string status = 7;
+  int32 type = 8; // unresolved enum identity; preserved as int32
+  bool isBrand = 9;
+  string name = 10;
+  string description = 11;
+  string externalLink = 12;
+  ProfileImage profileImage = 13;
+  bool isInternal = 14;
+  Album albums = 15;
+  string siteCollectionId = 16;
+  bool isMuseum = 17;
+  string gridAlbumId = 18;
+  bytes field19 = 19;
+  int64 groupId = 20;
+  string profileImageUrl = 21;
+  Settings settings = 22;
+  bool isMember = 23;
+  string subscriptionCode = 24;
+  .shared.DateTime updatedDate = 25;
+  SiteTemplate template = 26;
+  SiteLinks links = 27;
+  repeated PinnedMedia pinnedMediaList = 28;
+  repeated Skill skillsList = 29;
+  Location location = 30;
+  repeated AvailabilityTag availabilityTagsList = 31;
+  bool pinRecentMedia = 32;
+  WorkPreferences workPreferences = 33;
+  int32 profileVisibility = 34; // unresolved enum identity; preserved as int32
+}
+
+message SiteLinks {
+  string personalUrl = 1;
+  string instagramUrl = 2;
+  string twitterUrl = 3;
+  string youtubeUrl = 4;
+  string tiktokUrl = 5;
+}
+
+message SiteTemplate {
+  int32 name = 1; // unresolved enum identity; preserved as int32
+}
+
+message Skill {
+  int32 type = 1; // unresolved enum identity; preserved as int32
+}
+
+message WorkPreferences {
+  bool willTravelForWork = 1;
+  repeated Location locationsList = 2;
+  int32 projectWorkRateScale = 3; // unresolved enum identity; preserved as int32
+}

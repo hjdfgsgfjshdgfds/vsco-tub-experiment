@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>VSCO Live Feed</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="leaflet.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://im.vsco.co">
+</head>
+
+<body>
+  <div class="header">
+    <div class="header-top">
+      <div class="header-left">
+        <h1>VSCO <span>Live Feed</span></h1>
+        <form id="search-form">
+          <input type="text" id="query" placeholder="Search anything... 🔍" autofocus>
+          <button type="submit">Search</button>
+          <button type="button" id="browse-btn">🌐 Live Feed</button>
+          <button type="button" id="challenge-btn">⏳ Scraper</button>
+          <label class="vault-toggle gps-feature-toggle" title="Turn GPS badges, GPS filtering, and GPS scans on or off">
+            <input type="checkbox" id="global-gps-toggle">
+            <span>📍 GPS On</span>
+          </label>
+          <label class="vault-toggle exif-gps-toggle" title="Filter results that have EXIF GPS or location metadata">
+            <input type="checkbox" id="global-exifgps-filter">
+            <span>📍 Has EXIF GPS</span>
+          </label>
+          <button type="button" id="luck-btn">🎲 Random</button>
+          <select id="grid-field-filter" title="People/Bio field filter">
+            <option value="people">Name</option>
+            <option value="username">Username</option>
+            <option value="bio">Bio</option>
+            <option value="domain">Domain</option>
+            <option value="siteId">Site ID</option>
+            <option value="all">All fields</option>
+          </select>
+          <button type="button" id="people-btn">👤 People</button>
+          <button type="button" id="following-btn">👥 Following</button>
+          <button type="button" id="following-updates-btn">↻ Check Following Updates</button>
+          <button type="button" id="for-you-btn">✨ Discover</button>
+          <button type="button" id="bio-btn">📝 Bio</button>
+          <button type="button" id="review-queue-btn">👀 Review Queue</button>
+          <button type="button" id="fully-liked-btn">❤️ Fully Liked</button>
+          <button type="button" id="reposts-btn">🔁 Reposts</button>
+          <button type="button" id="updates-btn">🔔 Updates</button>
+          <button type="button" id="social-matches-btn">🔎 Social</button>
+          <button type="button" id="siteids-btn">💾 Site IDs</button>
+          <button type="button" id="site-edge-btn">🔢 Site Edge</button>
+          <button type="button" id="settings-btn">⚙️ Settings</button>
+        </form>
+        <div id="scraper-ui" class="scraper-dropdown" style="display: none;">
+          <input type="datetime-local" id="scrape-start" class="scraper-input">
+          <span class="scraper-to-text">to</span>
+          <input type="datetime-local" id="scrape-end" class="scraper-input">
+          <select id="vault-date-mode" class="scraper-input" title="Choose whether Filter Local uses the media creation time or when this extension fetched it">
+            <option value="created">Date by: Created</option>
+            <option value="fetched">Date by: Fetched</option>
+          </select>
+          <button type="button" id="start-scrape-btn" class="scraper-btn btn-start">Start</button>
+          <button type="button" id="filter-local-btn" class="scraper-btn btn-filter"
+            title="Filter offline vault without fetching new images">Filter Local</button>
+          <button type="button" id="clear-seen-btn" class="scraper-btn btn-clear"
+            title="Hide loaded images from future results. Shift+click to UNHIDE ALL.">X Clear Seen</button>
+          <button type="button" id="vault-stats-btn" class="scraper-btn btn-stats"
+            title="View query breakdown and filter by specific search queries">📊 Stats</button>
+          <button type="button" id="source-test-btn" class="scraper-btn btn-stats"
+            title="Sample the current scrape sources and count recent image/profile hits">🧪 Test Sources</button>
+          <button type="button" id="export-vault-btn" class="scraper-btn btn-export"
+            title="Download your entire Vault to a local JSON file">💾 Export</button>
+          <button type="button" id="import-vault-btn" class="scraper-btn btn-import"
+            title="Restore a Vault from a JSON file">📂 Import</button>
+          <button type="button" id="term-queue-btn" class="scraper-btn btn-queue" title="View and queue search terms">📋
+            Queue</button>
+          <div class="local-search-wrapper">
+            <input type="text" id="pfp-source-term-input" list="pfp-source-term-list" placeholder="PFP source term..."
+              class="scraper-input local-search-input">
+            <datalist id="pfp-source-term-list"></datalist>
+            <button type="button" id="pfp-source-term-btn" class="scraper-btn btn-stats"
+              title="Check PFP changes for users scraped by this exact source term">🖼 Check Term PFPs</button>
+          </div>
+          <div class="local-search-wrapper">
+            <input type="text" id="local-search-input" placeholder="Search Vault..."
+              class="scraper-input local-search-input">
+            <button type="button" id="local-search-btn" class="scraper-btn btn-local">🔍 Local</button>
+          </div>
+          <button type="button" id="shown-pfp-btn" class="scraper-btn btn-stats"
+            title="Check PFP changes for users in the current filtered Vault results">🖼 Check Showing PFPs</button>
+          <label class="local-search-wrapper" title="Parallel workers used by PFP-only checks. Turbo scans have no pacing delay until VSCO returns 429." style="gap:6px; color:#aaa; font-size:11px;">
+            PFP workers
+            <input type="number" id="pfp-worker-count" min="1" max="128" step="1" value="32"
+              class="scraper-input" style="width:72px; padding:8px;">
+          </label>
+          <div id="scrape-stats" class="scrape-stats-text"></div>
+        </div>
+        <div id="info"></div>
+      </div>
+      <div id="header-map" class="header-map"></div>
+    </div>
+    <div id="page-nav"></div>
+  </div>
+  <div id="grid"></div>
+  <div id="pagination"></div>
+  <script src="leaflet.js"></script>
+  <script src="exif.js"></script>
+  <script src="newtab.js"></script>
+  <script src="social_scrape_newtab.js"></script>
+</body>
+
+</html>

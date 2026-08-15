@@ -1,0 +1,79 @@
+{
+  "manifest_version": 3,
+  "name": "VSCO Tub — Search Results QA (86e9)",
+  "description": "Adds 10,000-result search, local sorting, filters, and profile presentation controls directly to VSCO.",
+  "version": "0.2.0",
+  "action": {
+    "default_title": "Open VSCO Search"
+  },
+  "permissions": [
+    "cookies",
+    "downloads",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "webRequest",
+    "alarms"
+    ,"notifications"
+  ],
+  "host_permissions": [
+    "https://vsco.co/*",
+    "https://*.vsco.co/*",
+    "https://i.vsco.co/*",
+    "http://127.0.0.1:5058/*",
+    "http://localhost:5058/*"
+    ,"http://127.0.0.1:8765/*"
+    ,"http://localhost:8765/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "docs/vsco-grpc-schema.json"
+      ],
+      "matches": [
+        "https://vsco.co/*"
+      ]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://vsco.co/*"
+      ],
+      "js": [
+        "vsco-grpc-bridge-main.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://vsco.co/*"
+      ],
+      "js": [
+        "social_scrape_newtab.js",
+        "vendor/country-coder.iife.js",
+        "vsco-search-enhancer.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://127.0.0.1:5058/*",
+        "http://localhost:5058/*"
+        ,"http://127.0.0.1:8765/*"
+        ,"http://localhost:8765/*"
+      ],
+      "js": [
+        "local-bridge-content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; img-src 'self' https://*.vsco.co https://i.vsco.co https://*.tile.openstreetmap.org; connect-src 'self' https://vsco.co https://*.vsco.co https://i.vsco.co https://*.tile.openstreetmap.org"
+  }
+}

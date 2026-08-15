@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package video;
+
+import "shared.proto";
+
+// Recovered statically from VSCO's generated JavaScript client.
+// Unresolved message and enum fields intentionally use wire-compatible bytes/int32.
+
+message Video {
+  string id = 1;
+  string uploadId = 2;
+  int64 siteId = 3;
+  int64 userId = 4;
+  string description = 5;
+  .shared.DateTime createdDate = 7;
+  .shared.DateTime lastUpdated = 8;
+  int32 status = 10; // unresolved enum identity; preserved as int32
+  .shared.DateTime statusDate = 11;
+  int32 transcodeStatus = 12; // unresolved enum identity; preserved as int32
+  .shared.DateTime transcodeStatusDate = 13;
+  int32 deleteStatus = 14; // unresolved enum identity; preserved as int32
+  .shared.DateTime deleteStatusDate = 15;
+  string playbackUrl = 19;
+  string posterUrl = 20;
+  int64 widthPx = 30;
+  int64 heightPx = 31;
+  double durationSec = 32;
+  bool hasAudio = 33;
+  int32 contentType = 34; // unresolved enum identity; preserved as int32
+  string clientId = 36;
+  bytes site = 37; // unresolved message type; preserved as opaque bytes
+  string shareLink = 38;
+  bool showLocation = 40;
+  .shared.Coords location = 41;
+}

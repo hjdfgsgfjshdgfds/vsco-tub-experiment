@@ -1,0 +1,108 @@
+syntax = "proto3";
+
+package grid;
+
+import "media_meta.proto";
+import "shared.proto";
+
+// Recovered statically from VSCO's generated JavaScript client.
+// Unresolved message and enum fields intentionally use wire-compatible bytes/int32.
+
+message CollectionRef {
+  string id = 1;
+  string note = 2;
+  .shared.DateTime dateAdded = 3;
+}
+
+message EditStack {
+  string key = 1;
+}
+
+message Image {
+  string id = 1;
+  int64 siteId = 2;
+  int64 userId = 3;
+  int32 status = 4; // unresolved enum identity; preserved as int32
+  .shared.DateTime updateDate = 5;
+  .shared.DateTime captureDate = 6;
+  .shared.DateTime uploadDate = 7;
+  ImageMeta imageMeta = 8;
+  .shared.Coords location = 9;
+  bool showLocation = 10;
+  int64 height = 11;
+  int64 width = 12;
+  string description = 13;
+  repeated string tagsList = 14;
+  string storageLocation = 15;
+  string fileName = 16;
+  bool isVideo = 17;
+  string videoFileName = 18;
+  ImageStatus imageStatus = 19;
+  repeated ThumbnailSize thumbnailSizeList = 20;
+  User user = 21;
+  string env = 22;
+  repeated int64 sitesList = 23;
+  string permaSubdomain = 24;
+  string gridName = 25;
+  repeated .media_meta.Tag tagsFullList = 26;
+  string responsiveUrl = 27;
+  string videoUrl = 28;
+  string shareLink = 29;
+  string source = 30;
+  bytes site = 31; // unresolved message type; preserved as opaque bytes
+  repeated string albumsList = 32;
+  int64 fileSize = 33;
+  string fileHash = 34;
+  int64 views = 35;
+  string storageRegion = 36;
+}
+
+message ImageMeta {
+  double aperture = 1;
+  string copyright = 2;
+  string flashMode = 3;
+  int64 iso = 4;
+  string make = 5;
+  string model = 6;
+  string shutterSpeed = 7;
+  string whiteBalance = 8;
+  string preset = 9;
+  EditStack editStack = 10;
+  CollectionRef collectionRef = 11;
+  int32 creationPlatform = 12; // unresolved enum identity; preserved as int32
+  int32 orientation = 13; // unresolved enum identity; preserved as int32
+  .shared.DateTime captureDate = 14;
+  int64 flashValue = 15;
+  .shared.Coords location = 16;
+  string software = 17;
+  int32 extension = 18; // unresolved enum identity; preserved as int32
+  int64 fileSize = 19;
+  string fileHash = 20;
+  bytes field21 = 21;
+}
+
+message ImageStatus {
+  int32 code = 1; // unresolved enum identity; preserved as int32
+  .shared.DateTime time = 2;
+  int64 deletedByUserId = 3;
+}
+
+message ThumbnailSize {
+  int64 cropx = 1;
+  int64 cropy = 2;
+  int64 cropWidth = 3;
+  int64 cropHeight = 4;
+  int64 width = 5;
+  int64 height = 6;
+}
+
+message UploadData {
+  string id = 1;
+  string ipaddress = 2;
+  .shared.DateTime date = 3;
+}
+
+message User {
+  int64 id = 1;
+  string name = 2;
+}
