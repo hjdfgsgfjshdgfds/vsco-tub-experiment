@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10110f">
+  <meta name="description" content="Scoutframe is a local-first visual discovery workspace for VSCO research.">
+  <title>Scoutframe</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <aside class="sidebar" aria-label="Scoutframe navigation">
+      <div class="brand-block">
+        <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div>
+          <strong>Scoutframe</strong>
+          <small>Visual discovery</small>
+        </div>
+      </div>
+
+      <nav id="primary-nav" class="primary-nav">
+        <button type="button" data-view="explore" class="nav-item is-active"><span>⌕</span> Explore</button>
+        <button type="button" data-view="collections" class="nav-item"><span>▣</span> Collections <b id="collection-count">0</b></button>
+        <button type="button" data-view="watches" class="nav-item"><span>◴</span> Watches <b id="watch-count">0</b></button>
+      </nav>
+
+      <div class="sidebar-spacer"></div>
+      <div id="plan-card" class="plan-card"></div>
+      <button type="button" class="nav-item upgrade-link" data-view="upgrade"><span>↗</span> Upgrade</button>
+      <div class="privacy-note">
+        <span class="privacy-dot"></span>
+        <div><strong>Local by design</strong><small>Cookies remain in Chrome. Your library stays on this machine.</small></div>
+      </div>
+    </aside>
+
+    <section class="workspace">
+      <header class="topbar">
+        <button id="mobile-menu" type="button" class="icon-button mobile-only" aria-label="Open navigation">☰</button>
+        <div id="breadcrumb" class="breadcrumb">Explore</div>
+        <div class="topbar-actions">
+          <button id="demo-pill" type="button" class="status-pill status-pill-demo" hidden>Demo data</button>
+          <button id="connection-pill" type="button" class="status-pill"><span></span><b>Checking companion</b></button>
+          <button id="help-button" type="button" class="icon-button" aria-label="Open help">?</button>
+        </div>
+      </header>
+
+      <main id="main" tabindex="-1"></main>
+    </section>
+  </div>
+
+  <aside id="detail-drawer" class="detail-drawer" aria-hidden="true"></aside>
+  <div id="toast-region" class="toast-region" aria-live="polite" aria-atomic="true"></div>
+
+  <dialog id="help-dialog" class="modal">
+    <form method="dialog" class="modal-card">
+      <button class="modal-close" aria-label="Close">×</button>
+      <p class="eyebrow">Scoutframe query syntax</p>
+      <h2>Search broadly. Filter precisely.</h2>
+      <div class="syntax-list">
+        <code>quiet coast</code><span>Words sent to VSCO search</span>
+        <code>"night train"</code><span>Keep a phrase together</span>
+        <code>-selfie</code><span>Exclude matching local metadata</span>
+        <code>from:username</code><span>Only results from a creator</span>
+        <code>camera:fujifilm</code><span>Observed camera metadata</span>
+        <code>country:norway</code><span>Observed country metadata</span>
+        <code>gps:true</code><span>Only results with observed coordinates</span>
+        <code>after:2025-01-01</code><span>Local timestamp boundary</span>
+        <code>aspect:portrait</code><span>portrait, landscape, square, wide, tall</span>
+      </div>
+      <p class="muted">Filters work only on metadata actually present in a result. Scoutframe does not infer or fabricate missing GPS, camera, or country data.</p>
+    </form>
+  </dialog>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

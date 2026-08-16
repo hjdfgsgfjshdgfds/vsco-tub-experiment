@@ -1,0 +1,20 @@
+{
+  "name": "scoutframe-commercial",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A local-first commercial VSCO discovery workspace with a minimal browser companion.",
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "SCOUTFRAME_DEV=1 node --watch server.mjs",
+    "check": "node scripts/check.mjs",
+    "test": "node --test test/*.test.mjs",
+    "license:keygen": "node scripts/generate-license-keys.mjs",
+    "license:issue": "node scripts/issue-license.mjs",
+    "pack:companion": "node scripts/pack-companion.mjs"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "license": "UNLICENSED"
+}

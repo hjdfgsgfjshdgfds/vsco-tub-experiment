@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Scoutframe Companion",
+  "description": "Makes read-only VSCO searches inside your existing Chrome session for the local Scoutframe app.",
+  "version": "0.1.0",
+  "action": {
+    "default_title": "Scoutframe Companion",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "host_permissions": [
+    "https://vsco.co/*",
+    "https://*.vsco.co/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://127.0.0.1:4177/*",
+        "http://localhost:4177/*"
+      ],
+      "js": ["bridge.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; base-uri 'none'"
+  }
+}
